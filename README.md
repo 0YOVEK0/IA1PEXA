@@ -56,6 +56,12 @@ Se recomienda crear una clase base para los enemigos, que incluya las siguientes
 - **Motor**: Unity
 - **Lenguaje**: C#
 
+## Tecnologías Utilizadas
+
+- **Lenguajes de programación:** C#
+- **Framework:** Unity 2023.2.18f1
+- **Documetacion Auxiliar:** Chatgpt-4o
+
 ## Instalación
 1. Clona o descarga el repositorio del proyecto.
 2. Abre el proyecto en Unity.
