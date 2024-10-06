@@ -25,7 +25,7 @@ Se recomienda crear una clase base para los enemigos, que incluya las siguientes
 - **Daño**: Los enemigos causan daño al jugador al colisionar con él.
 - **Efectos**: (Puntos extra) Los enemigos pueden brillar de color rojo al recibir daño, y se pueden agregar animaciones de muerte.
 
-[Enemigo Torrets](Assets/GIT/Assets/GIT/1.1.mp4)
+[Enemigo Torrets]([https://www.youtube.com/watch?v=ID_DEL_VIDEO](https://youtu.be/yS6p_gJR_3c))
 
 
 
