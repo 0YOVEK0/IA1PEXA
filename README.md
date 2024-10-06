@@ -28,6 +28,7 @@ Se recomienda crear una clase base para los enemigos, que incluya las siguientes
 [Enemigo Torrets](Assets/GIT/Vídeo sin título ‐ Hecho con Clipchamp (32).mp4)
 
 
+
 #### Enemigo Tipo Torreta
 - **Cono de Visión**: Tiene un cono de visión que rota y detecta al jugador.
 - **Disparo**: Dispara al jugador al ser detectado, incluso si el jugador sale de su cono de visión.
