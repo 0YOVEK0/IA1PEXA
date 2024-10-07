@@ -116,7 +116,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.89, y: 1.28, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 952287302593314983}
@@ -197,6 +197,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 750446784854246081, guid: ead1dab81b19d9e449ce946621c98a80, type: 3}
   fireRate: 2
   bulletSpeed: 10
+  wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!50 &7772691808740287781
 Rigidbody2D:
   serializedVersion: 4
@@ -259,7 +262,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 4
+  m_Radius: 3
 --- !u!1 &4378317014340191760
 GameObject:
   m_ObjectHideFlags: 0

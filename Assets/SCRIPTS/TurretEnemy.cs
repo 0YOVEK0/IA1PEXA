@@ -9,6 +9,7 @@ public class TurretEnemy : Enemy
     public GameObject bulletPrefab; // Prefab de bala
     public float fireRate = 2f; // Velocidad de disparo
     public float bulletSpeed = 10f; // Velocidad de la bala
+    public LayerMask wallLayerMask; // Capa de los muros
 
     private bool playerInSight = false; // Si el jugador está en el campo de visión
     private Transform player; // Referencia al jugador
@@ -18,8 +19,8 @@ public class TurretEnemy : Enemy
     {
         RotateVision(); // Rotar el cono de visión
 
-        // Detectar al jugador
-        if (playerInSight && Time.time >= nextFireTime)
+        // Detectar al jugador y verificar si no hay muro en el camino
+        if (playerInSight && !IsWallBlockingView() && Time.time >= nextFireTime)
         {
             ShootAtPlayer(); // Disparar al jugador
             nextFireTime = Time.time + 1f / fireRate; // Establecer el tiempo para el próximo disparo
@@ -75,5 +76,17 @@ public class TurretEnemy : Enemy
         }
     }
 
-    
+    bool IsWallBlockingView()
+    {
+        // Verificar si hay un muro entre la torreta y el jugador usando un Raycast2D
+        Vector2 directionToPlayer = (player.position - firePoint.position).normalized;
+        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, directionToPlayer, visionDistance, wallLayerMask);
+
+        // Si el Raycast2D impacta algo, significa que hay un muro bloqueando
+        if (hit.collider != null)
+        {
+            return true; // Hay un muro en el camino
+        }
+        return false; // No hay muros bloqueando
+    }
 }
