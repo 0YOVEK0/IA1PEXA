@@ -52,9 +52,6 @@ Se recomienda crear una clase base para los enemigos, que incluya las siguientes
   
 [![Enemigo Escapista](https://img.youtube.com/vi/41tlIUtn-5E/0.jpg)](https://www.youtube.com/watch?v=41tlIUtn-5E)
 
-## Requisitos Técnicos
-- **Motor**: Unity
-- **Lenguaje**: C#
 
 ## Tecnologías Utilizadas
 
