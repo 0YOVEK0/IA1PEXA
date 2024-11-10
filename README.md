@@ -42,7 +42,7 @@ Se recomienda crear una clase base para los enemigos, que incluya las siguientes
 - **Interacción con Paredes**: Al chocar con una pared, su velocidad se reduce a 0.0 (opcional).
 - **Daño Proporcional**: (Puntos extra) El daño causado aumenta según la velocidad del enemigo al chocar con el jugador.
   
-[![Enemigo Pesado](https://img.youtube.com/vi/adZuMjNtcic/0.jpg)](https://www.youtube.com/watch?v=adZuMjNtcic)
+[![Enemigo Escapista](https://img.youtube.com/vi/41tlIUtn-5E/0.jpg)](https://www.youtube.com/watch?v=41tlIUtn-5E)
 
 #### Enemigo Escapista
 - **Flee**: Huye del jugador durante un tiempo y luego se detiene.
@@ -50,11 +50,8 @@ Se recomienda crear una clase base para los enemigos, que incluya las siguientes
 - **Movimiento Ligero**: Acelera rápidamente, pero no alcanza alta velocidad.
 - **Obstacle Avoidance**: (Puntos extra) Realiza *obstacle avoidance* mientras huye.
   
-[![Enemigo Escapista](https://img.youtube.com/vi/41tlIUtn-5E/0.jpg)](https://www.youtube.com/watch?v=41tlIUtn-5E)
+[![Enemigo Pesado](https://img.youtube.com/vi/adZuMjNtcic/0.jpg)](https://www.youtube.com/watch?v=adZuMjNtcic)
 
-## Requisitos Técnicos
-- **Motor**: Unity
-- **Lenguaje**: C#
 
 ## Tecnologías Utilizadas
 
