@@ -13,9 +13,12 @@ public class NavMeshEscapistEnemy : MonoBehaviour
     public float lineOfSightDuration = 2f;
     public float shotCooldown = 1f;
     
-    public int maxHP = 50; // Vida máxima del enemigo
-    private int currentHP; // Vida actual del enemigo
-
+    public int maxHP = 50;
+    private int currentHP;
+    
+    public float speed = 2f; // Velocidad ajustable desde el editor
+    public float acceleration = 5.4f; // Aceleración ajustable desde el editor
+    
     private enum EnemyState { Active, Tired }
     private EnemyState currentState;
     private float tiredStateTimer;
@@ -28,10 +31,12 @@ public class NavMeshEscapistEnemy : MonoBehaviour
         agent.updatePosition = true;
         agent.updateRotation = false;
         currentState = EnemyState.Active;
-        agent.speed = 2f; // Ajustar para movimiento más ligero
-        agent.acceleration = 6f;
 
-        currentHP = maxHP; // Inicializar vida
+        // Asignar las variables públicas en lugar de valores hardcodeados
+        agent.speed = speed;
+        agent.acceleration = acceleration;
+
+        currentHP = maxHP;
     }
 
     void Update()
@@ -48,12 +53,12 @@ public class NavMeshEscapistEnemy : MonoBehaviour
 
     private void HandleActiveState()
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.position - transform.position, detectionRange);
+
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
             agent.SetDestination(transform.position);
+
             if (!isShooting)
             {
                 StartCoroutine(ShootAtPlayer());
@@ -64,7 +69,8 @@ public class NavMeshEscapistEnemy : MonoBehaviour
             agent.SetDestination(player.position);
         }
 
-        if (distanceToPlayer < detectionRange && currentState != EnemyState.Tired)
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position); // Mover cerca de su primer uso
+        if (distanceToPlayer < detectionRange)
         {
             Vector3 fleeDirection = (transform.position - player.position).normalized;
             Vector3 fleePosition = transform.position + fleeDirection * fleeDistance;
