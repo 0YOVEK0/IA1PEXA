@@ -12,9 +12,6 @@ public class BossEnemy : MonoBehaviour
     public float patrolSpeed = 2f;
     public float chaseSpeed = 4f;
 
-    public int maxHP = 100;
-    private int currentHP;
-    
     public Transform[] patrolPoints;
     private int currentPatrolIndex = 0;
     private bool isPatrolling = true;
@@ -30,7 +27,6 @@ public class BossEnemy : MonoBehaviour
         agent.updatePosition = true;
         agent.updateRotation = true;
         currentState = EnemyState.Patrolling;
-        currentHP = maxHP;
 
         agent.speed = patrolSpeed;
     }
@@ -61,13 +57,13 @@ public class BossEnemy : MonoBehaviour
         agent.speed = patrolSpeed;
         agent.SetDestination(patrolPoints[currentPatrolIndex].position);
 
-        // If we reach the patrol point, move to the next one
+        // Si llegamos al punto de patrullaje, ir al siguiente
         if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].position) < 1f)
         {
             currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
         }
 
-        // Check if the player is in range to start chasing
+        // Verificar si el jugador está dentro del rango para empezar a perseguir
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         if (distanceToPlayer < detectionRange)
         {
@@ -80,7 +76,7 @@ public class BossEnemy : MonoBehaviour
         agent.speed = chaseSpeed;
         agent.SetDestination(player.position);
 
-        // Check if the player is within melee range
+        // Verificar si el jugador está dentro del rango de melee
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         if (distanceToPlayer < meleeRange)
         {
@@ -91,7 +87,7 @@ public class BossEnemy : MonoBehaviour
             currentState = EnemyState.Patrolling;
         }
 
-        // Attempt to shoot the player if within range
+        // Intentar disparar al jugador si está dentro del rango
         if (distanceToPlayer <= detectionRange && !isShooting)
         {
             StartCoroutine(ShootAtPlayer());
@@ -100,26 +96,26 @@ public class BossEnemy : MonoBehaviour
 
     private void HandleAttackingState()
     {
-        // Melee attack
+        // Ataque cuerpo a cuerpo
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         if (distanceToPlayer < meleeRange)
         {
             MeleeAttack();
         }
 
-        // After attacking, wait a bit before moving back to chase/patrol
+        // Después de atacar, esperar un poco antes de volver a perseguir o patrullar
         currentState = EnemyState.Resting;
     }
 
     private void HandleRestingState()
     {
-        // Rest for a short duration after attacking
+        // Descansar durante un corto periodo después de un ataque
         StartCoroutine(RestCooldown());
     }
 
     private void MeleeAttack()
     {
-        // Simulate melee attack here
+        // Simular ataque cuerpo a cuerpo aquí
         Debug.Log("Melee attack!");
         // Aquí podrías hacer que el boss cause daño al jugador en el rango de melee
     }
@@ -137,23 +133,6 @@ public class BossEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);  // Descanso después de un ataque
         currentState = EnemyState.Chasing;   // Regresar al estado de persecución
-    }
-
-    public void TakeDamage(int damage)
-    {
-        currentHP -= damage;
-        Debug.Log("HP del enemigo: " + currentHP);
-
-        if (currentHP <= 0)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-        Debug.Log("El enemigo ha muerto");
-        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()

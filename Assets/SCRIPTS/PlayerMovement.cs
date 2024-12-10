@@ -12,10 +12,17 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movement; // Dirección del movimiento
     private Rigidbody2D rb; // Rigidbody para el personaje
 
+    public GameObject deathPanel; // Panel de muerte (debe asignarse en el Inspector)
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentHP = maxHP; // Inicializar HP
+
+        if (deathPanel != null)
+        {
+            deathPanel.SetActive(false); // Asegurarse de que el panel esté oculto al inicio
+        }
     }
 
     void Update()
@@ -85,6 +92,14 @@ public class PlayerMovement : MonoBehaviour
     void Die()
     {
         Debug.Log("El personaje ha muerto");
-        // Aquí puedes agregar lógica adicional, como detener el juego o reiniciar el nivel.
+
+        // Si tienes un Panel de muerte en tu Canvas, activarlo
+        if (deathPanel != null)
+        {
+            deathPanel.SetActive(true); // Activar el panel de muerte
+        }
+
+        
+        Time.timeScale = 0f; // Detener el tiempo (si lo deseas) para que el jugador vea el panel
     }
 }

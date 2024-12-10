@@ -22,6 +22,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // Método público para acceder a la vida actual
+    public int GetCurrentHP()
+    {
+        return currentHP;
+    }
+
     protected virtual void Die()
     {
         Debug.Log(gameObject.name + " ha muerto.");
