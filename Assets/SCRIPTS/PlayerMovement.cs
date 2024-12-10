@@ -11,12 +11,15 @@ public class PlayerMovement : MonoBehaviour
     private int currentHP; // Vida actual del personaje
     private Vector2 movement; // Dirección del movimiento
     private Rigidbody2D rb; // Rigidbody para el personaje
+    private SpriteRenderer spriteRenderer; // Referencia al SpriteRenderer
+    private bool isMoving = false; // Verifica si el jugador está en movimiento
 
     public GameObject deathPanel; // Panel de muerte (debe asignarse en el Inspector)
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Obtener el componente SpriteRenderer
         currentHP = maxHP; // Inicializar HP
 
         if (deathPanel != null)
@@ -33,6 +36,18 @@ public class PlayerMovement : MonoBehaviour
 
         // Normalizar el vector de movimiento para que las diagonales no sean más rápidas
         movement = movement.normalized;
+
+        // Cambiar color al moverse
+        if (movement != Vector2.zero && !isMoving)
+        {
+            isMoving = true;
+            ChangeColor(Color.green); // Cambiar a verde mientras se mueve
+        }
+        else if (movement == Vector2.zero && isMoving)
+        {
+            isMoving = false;
+            ResetColor(); // Volver al color original cuando deje de moverse
+        }
 
         // Llamar a la función para rotar el personaje
         RotateCharacter();
@@ -67,6 +82,10 @@ public class PlayerMovement : MonoBehaviour
         // Obtener el Rigidbody2D de la bala y darle velocidad en la dirección hacia la que está mirando
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         bulletRb.velocity = firePoint.right * bulletSpeed; // Mueve la bala hacia adelante (eje X local)
+
+        // Cambiar el color del sprite al disparar
+        ChangeColor(Color.yellow);
+        Invoke(nameof(ResetColor), 0.2f); // Resetear color después de 0.2 segundos
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -82,6 +101,10 @@ public class PlayerMovement : MonoBehaviour
     {
         currentHP -= damage; // Reducir HP
         Debug.Log("HP actual: " + currentHP);
+
+        // Cambiar el color del sprite al recibir daño
+        ChangeColor(Color.red);
+        Invoke(nameof(ResetColor), 0.5f); // Resetear color después de 0.5 segundos
 
         if (currentHP <= 0)
         {
@@ -99,7 +122,19 @@ public class PlayerMovement : MonoBehaviour
             deathPanel.SetActive(true); // Activar el panel de muerte
         }
 
-        
         Time.timeScale = 0f; // Detener el tiempo (si lo deseas) para que el jugador vea el panel
+    }
+
+    void ChangeColor(Color newColor)
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = newColor;
+        }
+    }
+
+    void ResetColor()
+    {
+        ChangeColor(Color.white); // Cambiar de vuelta al color blanco
     }
 }

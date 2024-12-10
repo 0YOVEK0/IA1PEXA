@@ -7,7 +7,7 @@ public class BossEnemy : MonoBehaviour
     public NavMeshAgent agent;
     public Transform player;
     public float detectionRange = 10f;
-    public float meleeRange = 2f;
+    public float meleeRange = 2f; // Este puede ser innecesario si solo usas ataque a distancia
     public float shotCooldown = 1f;
     public float patrolSpeed = 2f;
     public float chaseSpeed = 4f;
@@ -21,12 +21,16 @@ public class BossEnemy : MonoBehaviour
     private float shotCooldownTimer;
     private bool isShooting;
 
+    private Animator animator; // Referencia al Animator del Boss
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.updatePosition = true;
         agent.updateRotation = true;
         currentState = EnemyState.Patrolling;
+
+        animator = GetComponent<Animator>(); // Obtener el Animator del Boss
 
         agent.speed = patrolSpeed;
     }
@@ -57,6 +61,9 @@ public class BossEnemy : MonoBehaviour
         agent.speed = patrolSpeed;
         agent.SetDestination(patrolPoints[currentPatrolIndex].position);
 
+        // Cambiar animación a caminar
+        animator.SetFloat("Speed", agent.velocity.magnitude);
+
         // Si llegamos al punto de patrullaje, ir al siguiente
         if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].position) < 1f)
         {
@@ -75,6 +82,9 @@ public class BossEnemy : MonoBehaviour
     {
         agent.speed = chaseSpeed;
         agent.SetDestination(player.position);
+
+        // Cambiar animación a caminar mientras persigue al jugador
+        animator.SetFloat("Speed", agent.velocity.magnitude);
 
         // Verificar si el jugador está dentro del rango de melee
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -96,11 +106,15 @@ public class BossEnemy : MonoBehaviour
 
     private void HandleAttackingState()
     {
-        // Ataque cuerpo a cuerpo
+        // Cambiar animación a ataque a distancia
+        animator.SetTrigger("RangeAttack");
+
+        // Si está dentro del rango, hacer un disparo
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        if (distanceToPlayer < meleeRange)
+        if (distanceToPlayer < detectionRange)
         {
-            MeleeAttack();
+            // Aquí se simula un ataque a distancia (puede ser disparar un proyectil)
+            ShootAtPlayer();
         }
 
         // Después de atacar, esperar un poco antes de volver a perseguir o patrullar
@@ -109,6 +123,9 @@ public class BossEnemy : MonoBehaviour
 
     private void HandleRestingState()
     {
+        // Cambiar animación a idle (reposo)
+        animator.SetFloat("Speed", 0f);
+
         // Descansar durante un corto periodo después de un ataque
         StartCoroutine(RestCooldown());
     }
@@ -125,7 +142,10 @@ public class BossEnemy : MonoBehaviour
         isShooting = true;
         Debug.Log("Shooting at player!");
         // Aquí puedes implementar el daño a distancia, por ejemplo, instanciando proyectiles.
-        yield return new WaitForSeconds(shotCooldown);
+        animator.SetTrigger("RangeAttack");  // Activar animación de disparo
+
+        // Añadir lógica de disparo aquí, por ejemplo, creando un proyectil.
+        yield return new WaitForSeconds(shotCooldown); // Espera el tiempo de cooldown
         isShooting = false;
     }
 
