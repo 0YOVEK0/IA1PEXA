@@ -52,6 +52,23 @@ Se recomienda crear una clase base para los enemigos, que incluya las siguientes
   
 [![Enemigo Pesado](https://img.youtube.com/vi/adZuMjNtcic/0.jpg)](https://www.youtube.com/watch?v=adZuMjNtcic)
 
+# 🛡️ Boss Enemy AI en Unity
+
+Este script implementa un sistema de inteligencia artificial para un Boss en Unity que combina comportamientos de patrullaje, persecución, ataque y descanso. El enemigo utiliza **NavMeshAgent** para su navegación y cuenta con un sistema de estados (FSM) para gestionar su lógica de comportamiento.
+
+## 🎮 Características principales:
+- **Estados del Boss**:
+  - **Patrullaje**: El Boss se mueve entre puntos predefinidos hasta detectar al jugador.
+  - **Persecución**: Cuando el jugador está en el rango de detección, el Boss lo persigue.
+  - **Ataque a distancia**: Dispara proyectiles hacia el jugador al entrar en rango.
+  - **Descanso**: Toma un breve descanso después de atacar antes de reanudar la persecución.
+- **Animaciones integradas**: Cambia entre animaciones de caminar, reposo y ataque según el estado.
+- **Debug visual**: Muestra el rango de detección y los puntos de patrullaje en la escena.
+
+
+## 🎥 Video demostrativo:
+[![Ver en YouTube](https://www.youtube.com/watch?v=wx2xodpRv68.jpg)](https://www.youtube.com/watch?v=wx2xodpRv68)
+
 
 ## Tecnologías Utilizadas
 
