@@ -67,7 +67,7 @@ Este script implementa un sistema de inteligencia artificial para un Boss en Uni
 
 
 ## 🎥 Video demostrativo:
-[![Ver en YouTube](https://www.youtube.com/watch?v=wx2xodpRv68.jpg)](https://www.youtube.com/watch?v=wx2xodpRv68)
+[![Ver en YouTube](https://img.youtube.com/vi/wx2xodpRv68/maxresdefault.jpg)](https://www.youtube.com/watch?v=wx2xodpRv68)
 
 
 ## Tecnologías Utilizadas
