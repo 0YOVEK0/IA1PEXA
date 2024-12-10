@@ -671,7 +671,7 @@ RectTransform:
   m_Father: {fileID: 232345274}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1702,6 +1702,7 @@ MonoBehaviour:
   countdownText: {fileID: 838162531}
   boss: {fileID: 3632166}
   obstacle: {fileID: 123615269}
+  slider: {fileID: 1280020377}
   countdownTime: 5
 --- !u!1 &838162530
 GameObject:
@@ -1899,8 +1900,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2023086442}
   - {fileID: 1280020376}
+  - {fileID: 2023086442}
   - {fileID: 1603617265}
   - {fileID: 838162533}
   m_Father: {fileID: 0}
@@ -57417,7 +57418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1280020376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -57747,7 +57748,7 @@ RectTransform:
   m_Father: {fileID: 1340783571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
