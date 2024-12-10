@@ -21,7 +21,8 @@ public class BossEnemy : MonoBehaviour
     private float shotCooldownTimer;
     private bool isShooting;
 
-    private Animator animator; // Referencia al Animator del Boss
+    private Animator animator;
+    public AudioSource bossMusic;
 
     void Start()
     {
@@ -75,6 +76,11 @@ public class BossEnemy : MonoBehaviour
         if (distanceToPlayer < detectionRange)
         {
             currentState = EnemyState.Chasing;
+        }
+
+        if (bossMusic != null && !bossMusic.isPlaying)
+        {
+            bossMusic.Play();
         }
     }
 
